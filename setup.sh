@@ -21,15 +21,6 @@ PYTHON="${PYTHON}${PYVER}"
 # Install Python dependencies
 sudo ${PYTHON} -m pip install -Ur requirements.txt
 
-for directory in capstone; do
-    pushd $directory
-    sudo ./make.sh install
-
-    cd bindings/python
-    sudo ${PYTHON} setup.py install
-    popd
-done
-
 # Load Pwndbg into GDB on every launch.
 if ! grep pwndbg ~/.gdbinit &>/dev/null; then
     echo "source $PWD/gdbinit.py" >> ~/.gdbinit
